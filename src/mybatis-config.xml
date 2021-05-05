@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties resource="db.properties"></properties>
+
+ 	<typeAliases>	<!-- 별명 -->
+ 		<typeAlias type="member.bean.MemberDTO" alias="member" />
+ 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode" />
+ 		<typeAlias type="board.bean.BoardDTO" alias="board" />
+ 	</typeAliases>
+ 
+ 
+	<environments default="development">
+   		<environment id="development">
+   			<transactionManager type="JDBC" />
+   			<!-- UNPOOLED : 커넥션풀을 따로 하나하나 잡겠다 memberServelt처럼 -->
+   			<dataSource type="POOLED">
+   				<!-- property : driver 변수와 driver 연결하는 환경설정 파일 -->
+   				<property name="driver" value="${jdbc.driver}"/>
+   				<property name="url" value="${jdbc.url}"/>
+   				<property name="username" value="${jdbc.username}"/>
+   				<property name="password" value="${jdbc.password}"/>
+   			</dataSource>
+   		</environment>
+	</environments>
+	
+	<!-- mapper 파일은 하나가 아니라 여러개가 올 수 있음 -->
+	<mappers>
+		<!-- resource라는 속성에는 .이 안먹힘->/로 써야함 -->
+		<mapper resource="member/dao/memberMapper.xml"/>
+		<mapper resource="board/dao/boardMapper.xml"/>
+	</mappers>
+	
+ </configuration>
